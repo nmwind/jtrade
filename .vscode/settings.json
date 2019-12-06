@@ -1,5 +1,7 @@
 {
   "files.exclude": {
-    "web\\node_modules": true
+    "web\\node_modules": true,
+    "web\\firebase\\functions\\node_modules": true,
+    "web\\functions\\node_modules": true
   }
 }
