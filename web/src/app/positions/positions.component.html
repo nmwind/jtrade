@@ -1,0 +1,47 @@
+<dx-tree-list id="gridContainer" [dataSource]="tradesStore" [showBorders]="true" 
+  [highlightChanges]="true"  itemsExpr="children" hasItemsExpr="hasItems" dataStructure="tree" width="100%" refreshMode="full">
+
+  <!-- <dxi-column type="buttons" width="45">
+    <dxi-button icon="unselectall" [onClick]="itemClick">
+    </dxi-button>
+  </dxi-column> -->
+
+  <dxi-column dataField="ticker.id" caption="Ticker" dataType="string" width="150">
+    <dxo-lookup [dataSource]="tickersStore" displayExpr="id" valueExpr="id"></dxo-lookup>
+  </dxi-column>
+  <dxi-column dataField="enterPrice" caption="Enter Price" dataType="number" [editorOptions]="{showSpinButtons:true}"
+    width="100">1000</dxi-column>
+
+  <!-- <dxi-column dataField="stoploss" caption="Stoploss" dataType="number" [editorOptions]="{showSpinButtons:true}">1024
+  </dxi-column>
+  <dxi-column dataField="takeprofit" caption="Takeprofit" dataType="number" [editorOptions]="{showSpinButtons:true}">
+    1500</dxi-column>
+
+  <dxi-column dataField="size" caption="Size" dataType="number" [editorOptions]="{showSpinButtons:true}">50</dxi-column>
+
+  <dxi-column dataField="balance" caption="Balance (k)" dataType="number" [editorOptions]="{showSpinButtons:true}">1800k
+  </dxi-column>
+  <dxi-column dataField="risk" caption="Risk (%)" dataType="number" [editorOptions]="{showSpinButtons:true}">0.05%
+  </dxi-column>
+
+  <dxi-column dataField="lockedMoney" caption="Locked (k)" dataType="number" [editorOptions]="{showSpinButtons:true}"
+    [allowEditing]="false">15k</dxi-column>
+
+  <dxi-column dataField="openedAt" caption="Opened At" dataType="datetime" [editorOptions]="{showSpinButtons:true}">
+  </dxi-column>
+  <dxi-column dataField="closedAt" caption="Closed At" dataType="datetime" [editorOptions]="{showSpinButtons:true}">
+  </dxi-column>
+  <dxi-column dataField="exitPrice" caption="Exit Price" dataType="number" [editorOptions]="{showSpinButtons:true}">1024
+  </dxi-column> -->
+
+  <dxo-editing mode="row" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true"></dxo-editing>
+
+
+
+  <!-- <div *dxTemplate="let cellInfo of 'tickerEditorTemplate'">
+    <dx-select-box [dataSource]="tickers" placeholder="Select ..." valueExpr="id" displayExpr="id"
+      [(value)]="cellInfo.value">
+    </dx-select-box>
+  </div> -->
+
+</dx-tree-list>

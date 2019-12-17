@@ -1,4 +1,4 @@
-export class TickerType {
+export class TickerClassDb {
     public id: number;
     public title: string;
 

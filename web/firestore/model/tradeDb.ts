@@ -1,7 +1,7 @@
-export class Trade {
-    public id: number;
+export class TradeDb {
+    public id: string;
     public tickerId: string;
-    public groupid?: number;
+    public groupId?: number;
     public enterPrice: number;
     public exitPrice?: number;
     public stoploss?: number;
@@ -14,6 +14,6 @@ export class Trade {
 
     public openedAt?: Date;
     public closedAt?: Date;
-    
+
     public createdAt: Date;
 }

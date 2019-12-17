@@ -1,4 +1,4 @@
-export class TickerInfo {
+export class TickerInfoDb {
     public tickerId: string;
     public priceStre: number;
     public priceStepCost: number;
