@@ -1,3 +1,36 @@
-<p>
-  addPosition works!
-</p>
+<dx-form id="form" [formData]="position" [colCount]="1">
+  
+  <dxi-item itemType="group" caption="Portfolio">
+    <dxi-item dataField="balance" editorType="dxNumberBox"
+      [editorOptions]="{showSpinButtons:true, format:'# k', min:0, step:1}">
+    </dxi-item>
+    <dxi-item dataField="risk" editorType="dxNumberBox"
+      [editorOptions]="{showSpinButtons:true, format:'#0.###%', min:0.005, max:1, step:0.005}"></dxi-item>
+  </dxi-item>
+
+  <dxi-item dataField="ticker" editorType="dxSelectBox"
+    [editorOptions]="{searchMode:'contains', searchEnabled:true, items:tickers, displayExpr:'id'}"></dxi-item>
+
+  <dxi-item itemType="group" caption="Primary">
+    <dxi-item dataField="enterPrice" editorType="dxNumberBox" [editorOptions]="priceEditorOptions">
+    </dxi-item>
+    <dxi-item dataField="stoploss" editorType="dxNumberBox" [editorOptions]="priceEditorOptions">
+    </dxi-item>
+    <dxi-item dataField="takeprofit" editorType="dxNumberBox" [editorOptions]="priceEditorOptions">
+    </dxi-item>
+
+    <dxi-item dataField="size" editorType="dxNumberBox" [editorOptions]="sizeEditorOptions">
+    </dxi-item>
+  </dxi-item>
+
+  <dxi-item itemType="group" caption="Secondary">
+    <dxi-item dataField="rmult" editorType="dxNumberBox" [editorOptions]="{readOnly:true, format:'#0.##'}"> </dxi-item>
+    <dxi-item dataField="loss" editorType="dxNumberBox" [editorOptions]="{readOnly:true, format:currencyFormat}">
+    </dxi-item>
+    <dxi-item dataField="take" editorType="dxNumberBox" [editorOptions]="{readOnly:true, format:currencyFormat}">
+    </dxi-item>
+    <dxi-item dataField="lockedMoney" editorType="dxNumberBox" [editorOptions]="{readOnly:true, format:currencyFormat}">
+    </dxi-item>
+  </dxi-item>
+
+</dx-form>

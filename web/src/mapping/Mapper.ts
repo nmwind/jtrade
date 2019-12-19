@@ -1,6 +1,7 @@
 import AutoMapper from 'ts-automapper';
 import { Trade } from 'src/viewmodels/trade';
-import { TradeDb } from 'firestore/model';
+import { TradeDb, TickerDb } from 'firestore/model';
+import { Ticker } from 'src/viewmodels';
 
 export class Mapper {
 
@@ -11,6 +12,13 @@ export class Mapper {
 
         AutoMapper.createDefinition<Trade, TradeDb>(Mapper.key(Trade, TradeDb))
             .map(src => src.id, tgt => tgt.id);
+
+        // AutoMapper.createDefinition<TickerDb, Ticker>(Mapper.key(TickerDb, Ticker))
+        //     .map(src => src.id, tgt => tgt.id)
+        //     .map(src => src.typeId, tgt => tgt.type)
+        //     .map(src=>src.classId, tgt=>tgt.class)
+        //     .map(src=>src.lot, tgt=>tgt.lot)
+        //     .map(src=>src.baseId, tgt=>(<any>tgt)._base = <Ticker>{id:sr});
     }
 
     public static map<TSource, TTarget>(src: TSource, srcType: { new(): TSource }, tgtType: { new(): TTarget }): TTarget {

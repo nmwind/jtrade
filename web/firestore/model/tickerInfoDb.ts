@@ -1,5 +1,6 @@
 export class TickerInfoDb {
     public tickerId: string;
-    public priceStre: number;
+    public priceStep: number;
     public priceStepCost: number;
+    public takeMoney: number;
 }

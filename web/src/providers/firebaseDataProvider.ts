@@ -17,7 +17,9 @@ export class FirebaseDataProvider implements DataProvider {
         return this._firestore.collection<TickerDb>("tickers").get().toPromise().then(p => {
             let result: TickerDb[] = new Array<TickerDb>();
             p.forEach(doc => {
-                result.push(<TickerDb>doc.data());
+                let o = <TickerDb>doc.data();
+                o.id = doc.id;
+                result.push(o);
             });
 
             return result;

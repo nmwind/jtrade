@@ -9,7 +9,9 @@ import { AngularFirestoreModule } from "@angular/fire/firestore"
 
 import { environment } from 'src/environments/environment';
 
-import { DxTreeListModule, DxSelectBoxModule, DxNavBarModule, DxTemplateModule } from 'devextreme-angular';
+import {
+   DxTreeListModule, DxSelectBoxModule, DxNavBarModule, DxTemplateModule, DxFormModule
+} from 'devextreme-angular';
 
 import "ts-automapper";
 import { PositionsComponent } from './positions/positions.component';
@@ -28,10 +30,13 @@ import { AddPositionComponent } from './addPosition/addPosition.component';
    imports: [
       BrowserModule,
       AppRoutingModule,
+
       DxTreeListModule,
       DxSelectBoxModule,
       DxNavBarModule,
       DxTemplateModule,
+      DxFormModule,
+
       AngularFireModule.initializeApp(environment.firebaseConfig),
       AngularFirestoreModule
    ],

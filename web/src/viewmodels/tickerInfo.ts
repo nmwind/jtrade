@@ -6,5 +6,8 @@ export class TickerInfo {
     private _priceStepCost: number;
     public get priceStepCost(): number { return this._priceStepCost; }
     public set priceStepCost(v: number) { this._priceStepCost = v; }
-}
 
+    private _takeMoney: number;
+    public get takeMoney(): number { return this._takeMoney; }
+    public set takeMoney(v: number) { this._takeMoney = v; }
+}

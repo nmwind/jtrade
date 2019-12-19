@@ -4,7 +4,8 @@ import { Observable, of } from "rxjs"
 import { TradeDb, TickerDb, TickerTypeDb, TickerClassDb } from 'firestore/model';
 import { Ticker, TickerInfo, Trade } from 'src/viewmodels';
 import { FirebaseDataProvider } from 'src/providers/firebaseDataProvider';
-import { TickerType, TickerClass } from 'general';
+import { TickerType, TickerClass, Utils } from 'general';
+import { Mapper } from 'src/mapping/Mapper';
 
 @Injectable({
   providedIn: 'root',
@@ -15,28 +16,58 @@ export class DataService {
   private _trades: Trade[];
 
   constructor(@Inject(FirebaseDataProvider) private _dataProvider: DataProvider) {
-    this._tickers = [
-      new Ticker("SBRF", TickerType.Futures, TickerClass.Stock, 100),
-      new Ticker("GAZR", TickerType.Futures, TickerClass.Stock, 100),
-    ];
 
-    this._trades = [
-      <Trade>{
-        id: "1",
-        enterPrice: 100.1,
-        groupId: "1",
-        ticker: new Ticker("SBRF", TickerType.Futures, TickerClass.Stock, 100),
-        children: [
-          <Trade>{ id: "2", enterPrice: 100.25, groupId: "1", ticker: new Ticker("SBRF", TickerType.Futures, TickerClass.Stock, 100) },
-          <Trade>{ id: "3", enterPrice: 101.25, groupId: "1", ticker: new Ticker("SBRF", TickerType.Futures, TickerClass.Stock, 100) }
-        ]
-      },
-      <Trade>{ id: "4", enterPrice: 256.25, ticker: new Ticker("GAZR", TickerType.Futures, TickerClass.Stock, 100) },
-    ];
+    // this._tickers = [
+    //   new Ticker("SBRF", TickerType.Futures, TickerClass.Stock, 100),
+    //   new Ticker("GAZR", TickerType.Futures, TickerClass.Stock, 100),
+    // ];
+
+    // this._trades = [
+    //   <Trade>{
+    //     id: "1",
+    //     enterPrice: 100.1,
+    //     groupId: "1",
+    //     ticker: new Ticker("SBRF", TickerType.Futures, TickerClass.Stock, 100),
+    //     children: [
+    //       <Trade>{ id: "2", enterPrice: 100.25, groupId: "1", ticker: new Ticker("SBRF", TickerType.Futures, TickerClass.Stock, 100) },
+    //       <Trade>{ id: "3", enterPrice: 101.25, groupId: "1", ticker: new Ticker("SBRF", TickerType.Futures, TickerClass.Stock, 100) }
+    //     ]
+    //   },
+    //   <Trade>{ id: "4", enterPrice: 256.25, ticker: new Ticker("GAZR", TickerType.Futures, TickerClass.Stock, 100) },
+    // ];
   }
 
-  public getTickers(): Observable<Ticker[]> {
-    return of(this._tickers);
+  public async getTickers(): Promise<Ticker[]> {
+    const tickersDb = await this._dataProvider.getTickers();
+    const dictionaryDb = Utils.toDictionary<TickerDb, TickerDb>(tickersDb, k => k.id, v => v);
+
+    const toTicker = (ticker: TickerDb): Ticker => {
+      return <Ticker>{
+        id: ticker.id,
+        type: ticker.typeId,
+        class: ticker.classId,
+        lot: ticker.lot,
+        title: ticker.title,
+        base: ticker.baseId == null ? null : <Ticker>{ id: ticker.baseId },
+        info: <TickerInfo>{ priceStep: 1, priceStepCost: 1, takeMoney:1653 },
+      }
+    }
+    const getTicker = (id: string, dic): Ticker => {
+      const ticker = toTicker(dic[id]);
+      if (ticker.base != null) {
+        ticker.base = getTicker(ticker.base.id, dic);
+      }
+      return ticker;
+    };
+
+    const tickers: Ticker[] = new Array<Ticker>();
+    tickersDb.forEach(db => {
+      tickers.push(getTicker(db.id, dictionaryDb));
+    });
+
+
+    return tickers;
+    //    return of(this._tickers);
     // return of([{
     //   id: "SBRF",
     //   typeId: TickerTypeDb.Futures,

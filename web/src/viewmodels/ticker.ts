@@ -3,16 +3,16 @@ import { TickerClass } from 'general/tickerClass.enum';
 import { TickerInfo } from './tickerInfo';
 
 export class Ticker {
-    constructor(id: string, type: TickerType, clss: TickerClass, lot: number,
-        base?: Ticker, title?: string, info?: TickerInfo) {
-        this._id = id;
-        this._type = type;
-        this._class = clss;
-        this._lot = lot;
-        this._base = base;
-        this._title = title;
-        this._info = info;
-    }
+    // constructor(id: string, type: TickerType, clss: TickerClass, lot: number,
+    //     base?: Ticker, title?: string, info?: TickerInfo) {
+    //     this._id = id;
+    //     this._type = type;
+    //     this._class = clss;
+    //     this._lot = lot;
+    //     this._base = base;
+    //     this._title = title;
+    //     this._info = info;
+    // }
     private _id: string;
     public get id(): string { return this._id; }
     // public set id(v: string) { this._id = v; }
@@ -27,7 +27,7 @@ export class Ticker {
 
     private _base?: Ticker;
     public get base(): Ticker { return this._base; }
-    // public set base(v: Ticker) { this._base = v; }
+    public set base(v: Ticker) { this._base = v; }
 
     private _lot: number;
     public get lot(): number { return this._lot; }

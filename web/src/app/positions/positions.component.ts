@@ -35,7 +35,7 @@ export class PositionsComponent implements OnInit {
 
     this.tickersStore = new CustomStore({
       load: (options) => {
-        return this._dataService.getTickers().toPromise();
+        return this._dataService.getTickers();
       }
     });
 
