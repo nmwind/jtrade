@@ -3,4 +3,6 @@ export class TickerInfoDb {
     public priceStep: number;
     public priceStepCost: number;
     public takeMoney: number;
+    
+    public timestamp: Date;
 }

@@ -6,6 +6,7 @@ import { Ticker, TickerInfo, Trade } from 'src/viewmodels';
 import { FirebaseDataProvider } from 'src/providers/firebaseDataProvider';
 import { TickerType, TickerClass, Utils } from 'general';
 import { Mapper } from 'src/mapping/Mapper';
+import { MoexService, MoexFutures } from './moex.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,29 +16,62 @@ export class DataService {
   private _tickers: Ticker[];
   private _trades: Trade[];
 
-  constructor(@Inject(FirebaseDataProvider) private _dataProvider: DataProvider) {
-
-    // this._tickers = [
-    //   new Ticker("SBRF", TickerType.Futures, TickerClass.Stock, 100),
-    //   new Ticker("GAZR", TickerType.Futures, TickerClass.Stock, 100),
-    // ];
-
-    // this._trades = [
-    //   <Trade>{
-    //     id: "1",
-    //     enterPrice: 100.1,
-    //     groupId: "1",
-    //     ticker: new Ticker("SBRF", TickerType.Futures, TickerClass.Stock, 100),
-    //     children: [
-    //       <Trade>{ id: "2", enterPrice: 100.25, groupId: "1", ticker: new Ticker("SBRF", TickerType.Futures, TickerClass.Stock, 100) },
-    //       <Trade>{ id: "3", enterPrice: 101.25, groupId: "1", ticker: new Ticker("SBRF", TickerType.Futures, TickerClass.Stock, 100) }
-    //     ]
-    //   },
-    //   <Trade>{ id: "4", enterPrice: 256.25, ticker: new Ticker("GAZR", TickerType.Futures, TickerClass.Stock, 100) },
-    // ];
+  constructor(@Inject(FirebaseDataProvider) private _dataProvider: DataProvider,
+    private _moexService: MoexService) {
   }
 
-  public async getTickers(): Promise<Ticker[]> {
+  public getTickers(): Promise<Ticker[]> {
+    // return [
+    //   <Ticker>{
+    //     id: "fut.id",
+    //     title: "fut.shortName",
+    //     type: TickerType.Futures,
+    //     //class: TickerClass.Stock,
+    //     lot: 1,
+    //     info: <TickerInfo>{
+    //       priceStep: 1,
+    //       priceStepCost: 1,
+    //       takeMoney: 100,
+    //     }
+    //   }
+    // ];
+    return this._moexService.getFutures().then(futures => {
+      const result = new Array<Ticker>();
+      futures.forEach(fut => {
+        console.log(fut);
+        result.push(<Ticker>{
+          id: fut.id,
+          title: fut.shortName,
+          type: TickerType.Futures,
+          //class: TickerClass.Stock,
+          lot: fut.lot,
+          info: <TickerInfo>{
+            priceStep: fut.stepPrice,
+            priceStepCost: fut.stepPriceCost,
+            takeMoney: fut.margin,
+          }
+        });
+      });
+      return result;
+    });
+    // const futures: MoexFutures[] = await this._moexService.getFutures();
+    // return futures.map<Ticker>(fut => {
+    //   return <Ticker>{
+    //     id: fut.id,
+    //     title: fut.shortName,
+    //     type: TickerType.Futures,
+    //     //class: TickerClass.Stock,
+    //     lot: fut.lot,
+    //     info: <TickerInfo>{
+    //       priceStep: fut.stepPrice,
+    //       priceStepCost: fut.stepPriceCost,
+    //       takeMoney: fut.margin,
+    //     }
+    //   }
+    // });
+  }
+
+  public async getTickers2(): Promise<Ticker[]> {
     const tickersDb = await this._dataProvider.getTickers();
     const dictionaryDb = Utils.toDictionary<TickerDb, TickerDb>(tickersDb, k => k.id, v => v);
 
@@ -49,7 +83,7 @@ export class DataService {
         lot: ticker.lot,
         title: ticker.title,
         base: ticker.baseId == null ? null : <Ticker>{ id: ticker.baseId },
-        info: <TickerInfo>{ priceStep: 1, priceStepCost: 1, takeMoney:1653 },
+        info: <TickerInfo>{ priceStep: 1, priceStepCost: 1, takeMoney: 1653 },
       }
     }
     const getTicker = (id: string, dic): Ticker => {
@@ -67,90 +101,10 @@ export class DataService {
 
 
     return tickers;
-    //    return of(this._tickers);
-    // return of([{
-    //   id: "SBRF",
-    //   typeId: TickerTypeDb.Futures,
-    //   classId: TickerClassDb.Stock,
-    //   baseId: "SBER",
-    //   lot: 100,
-    // },
-    // {
-    //   id: "GAZR",
-    //   typeId: TickerTypeDb.Futures,
-    //   classId: TickerClassDb.Stock,
-    //   baseId: "GAZP",
-    //   lot: 100,
-    // },
-
-    // {
-    //   id: "GAZP",
-    //   typeId: TickerTypeDb.Stock,
-    //   classId: TickerClassDb.Stock,
-    //   baseId: null,
-    //   lot: 10,
-    // },
-    // {
-    //   id: "SBER",
-    //   typeId: TickerTypeDb.Stock,
-    //   classId: TickerClassDb.Stock,
-    //   baseId: null,
-    //   lot: 10,
-    // },
-
-    // {
-    //   id: "GOLD",
-    //   typeId: TickerTypeDb.Futures,
-    //   classId: TickerClassDb.Commodity,
-    //   baseId: null,
-    //   lot: 1,
-    // },
-
-    // {
-    //   id: "Si",
-    //   typeId: TickerTypeDb.Futures,
-    //   classId: TickerClassDb.Currency,
-    //   baseId: "USDRUB_TOM",
-    //   lot: 1000,
-    // }]);
   }
 
   public getTrades(): Observable<Trade[]> {
     return of(this._trades);
-    // return of([
-    //   {
-    //     id: "1",
-    //     groupId: 1,
-    //     enterPrice: 1.1,
-    //     tickerId: "SBER",
-    //     size: 1,
-    //     balance: 1000,
-    //     risk: 0.01,
-    //     lockedMoney: 1,
-    //     createdAt: new Date(),
-    //   },
-    //   {
-    //     id: "2",
-    //     groupId: 1,
-    //     enterPrice: 2.1,
-    //     tickerId: "SBER",
-    //     size: 1,
-    //     balance: 1000,
-    //     risk: 0.01,
-    //     lockedMoney: 1,
-    //     createdAt: new Date(),
-    //   },
-    //   {
-    //     id: "3",
-    //     enterPrice: 3.1,
-    //     tickerId: "GAZP",
-    //     size: 1,
-    //     balance: 1000,
-    //     risk: 0.01,
-    //     lockedMoney: 1,
-    //     createdAt: new Date(),
-    //   },
-    // ]);
   }
 
   public deleteTrade(tradeId: string): Observable<boolean> {

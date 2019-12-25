@@ -17,6 +17,7 @@ import "ts-automapper";
 import { PositionsComponent } from './positions/positions.component';
 import { ArchiveComponent } from './archive/archive.component';
 import { AddPositionComponent } from './addPosition/addPosition.component';
+import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 
 // declare var automapper;
 
@@ -30,6 +31,8 @@ import { AddPositionComponent } from './addPosition/addPosition.component';
    imports: [
       BrowserModule,
       AppRoutingModule,
+      HttpClientModule,
+      HttpClientJsonpModule,
 
       DxTreeListModule,
       DxSelectBoxModule,

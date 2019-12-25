@@ -1,5 +1,5 @@
 <dx-form id="form" [formData]="position" [colCount]="1">
-  
+
   <dxi-item itemType="group" caption="Portfolio">
     <dxi-item dataField="balance" editorType="dxNumberBox"
       [editorOptions]="{showSpinButtons:true, format:'# k', min:0, step:1}">
@@ -9,7 +9,8 @@
   </dxi-item>
 
   <dxi-item dataField="ticker" editorType="dxSelectBox"
-    [editorOptions]="{searchMode:'contains', searchEnabled:true, items:tickers, displayExpr:'id'}"></dxi-item>
+    [editorOptions]="{searchMode:'contains', searchEnabled:true, searchExpr:['id','title'], items:tickers, displayExpr:'title'}">
+  </dxi-item>
 
   <dxi-item itemType="group" caption="Primary">
     <dxi-item dataField="enterPrice" editorType="dxNumberBox" [editorOptions]="priceEditorOptions">

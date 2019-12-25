@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Ticker } from 'src/viewmodels';
 import { DataService } from 'src/services/data.service';
+import { MoexService } from 'src/services/moex.service';
+import { FinamQuotesService } from 'src/services/finamQuotes.service';
 
 const getPrecision = (n: number): number => {
   for (var i = 0; n < 1; i++) {
@@ -42,9 +44,12 @@ export class AddPositionComponent implements OnInit {
   sizeEditorOptions: any = createNumberEditorOptions(1);
   currencyFormat: any = createCurrencyFormat("RUB");
 
-  tickers: Ticker[];
+  tickers: Ticker[] = [];
 
-  constructor(private _dataService: DataService) {
+  constructor(private _dataService: DataService,
+    private _moexService: MoexService,
+    private _finamService: FinamQuotesService) {
+
     this.position = new Position();
     this.position.balance = 1850;
     this.position.risk = 0.01;
@@ -52,14 +57,22 @@ export class AddPositionComponent implements OnInit {
     this.position.stoploss = 9500;
     this.position.takeprofit = 9900;
 
-    this.priceEditorOptions.format = createCurrencyFormat("RUB");
+    //this.priceEditorOptions.format = createCurrencyFormat("RUB");
+    this._moexService.getFutures().then(p => {
+      console.log(p);
+    });
   }
 
   ngOnInit() {
-    this._dataService.getTickers().then(data => {
-      console.log(data);
-      this.tickers = data;
-      this.position.ticker = this.tickers[0];
+    this._finamService.InitializedChanged.subscribe(() => {
+      this._dataService.getTickers().then(data => {
+        this.tickers = data;
+        this.position.ticker = this.tickers[0];
+      });
+      this._finamService.getCandles(this.tickers[0].id, new Date()).then(candle => {
+        this.position.enterPrice = candle[0].close;
+        console.log(candle);
+      });
     });
   }
 

@@ -1,0 +1,63 @@
+format:code[base[base]]
+---------------------------
+Type: Futures, Class: Index
+U500[USH0]
+MIX[MXH0]-big
+MXI[MMH0]-small
+RTS[RIH0]
+
+Type: Futures, Class: Currency
+Si[SiH0]
+Eu[EuH0]
+ED[EDH0]
+GBPU[GUH0]
+UJPY[JPH0]
+AUDU[AUH0]
+UCAD[CAH0]
+
+Type: Futures, Class: Commodity
+BR[BRF0]
+CL[CLF0]
+GOLD[GDH0]
+SILV[SVH0]
+PLT[PTH0]
+PLD[PDH0]
+
+Type: Futures, Class: Stock
+SBRF[SRH0[SBER]]
+SBPR[SPH0[SBERP]]
+
+----------------------------
+
+Type: Stock, Class: Stock
+SBER
+SBERP
+GAZP
+LKOH
+ROSN
+MGNT
+GMKN
+MOEX
+NVTK
+VTBR
+TATN
+ALRS
+CHMF
+SNGS
+SNGSP
+AFLT
+MAGN
+NLMK
+AFKS
+MTSS
+PLZL
+RASP
+HYDR
+FEES
+RTKM
+BANEP
+ENRU
+
+
+Type: Currency, Class: Currency
+USDRUB_TOM
