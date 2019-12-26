@@ -73,12 +73,17 @@ export class AddPositionComponent implements OnInit {
     });
   }
 
-  protected onSelected(args) {
+  public onSelected(args) {
     if (args.value != null) {
       const _this = AddPositionComponent._ref;
       const ticker = _this.tickers.find((ticker) => ticker.id == args.value);
       _this.setTicker(ticker);
     }
+  }
+
+  public tickerDisplayFormat(ticker: Ticker) {
+    if (ticker == null) return null;
+    return `${ticker.title}  (${ticker.marketData.last})`;
   }
 
   protected setTicker(ticker: Ticker) {
@@ -90,11 +95,6 @@ export class AddPositionComponent implements OnInit {
     this.position.takeprofit = ticker.marketData.last + ticker.marketData.last * 0.03;
 
     this.position.ticker = ticker;
-  }
-
-  protected tickerDisplayFormat(ticker: Ticker) {
-    if (ticker == null) return null;
-    return `${ticker.title}  (${ticker.marketData.last})`;
   }
 
   private readOrDefault(key: string, def: any): any {
