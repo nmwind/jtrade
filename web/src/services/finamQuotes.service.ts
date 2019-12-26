@@ -84,10 +84,9 @@ export class FinamQuotesService {
     // });
 
 
-    console.log("aaaaaaaaaa");
-    this.jsonp(url, function (data) {
-      console.log(data);
-    });
+    // this.jsonp(url, function (data) {
+    //   console.log(data);
+    // });
 
     // var xhr = new XMLHttpRequest();
     // xhr.open("GET", url);
@@ -103,12 +102,16 @@ export class FinamQuotesService {
     // });
 
 
-    // this._http.get<ICharts>(FinamQuotesService.IDS_URL, {
-    //   headers: new HttpHeaders()
+    // this._http.get(FinamQuotesService.IDS_URL, {
+    //   responseType: "text"
     // }).subscribe(data => {
-    //   this._icharts = data;
+    //   eval(data);
+    //   debugger
+    //   //this._icharts = data;
     //   this._initialized.next(true);
     // });
+    this._icharts = <ICharts><any>window;
+    setTimeout(()=>this._initialized.next(true), 1000);
   }
 
 

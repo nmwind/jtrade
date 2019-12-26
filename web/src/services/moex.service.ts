@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 //list of everything: http://iss.moex.com/iss/index
 type iss = {
-  only?: "securities";
+  only?: "securities,marketdata";
   meta?: "on" | "off";
 }
 type QueryParameters = {
@@ -19,6 +19,10 @@ type QueryParameters = {
 
 interface MoexResponse<T extends MoexEntity> {
   securities: {
+    columns: Array<string>,
+    data: Array<T>
+  },
+  marketdata: {
     columns: Array<string>,
     data: Array<T>
   }
@@ -36,16 +40,19 @@ export class MoexService {
 
   public async getFutures(): Promise<MoexFutures[]> {
     const response = await this.http.get<MoexResponse<MoexFutures>>(MoexService.createUrl("futures", "forts", null, {
-      iss: { only: "securities" },
+      //iss: { only: "securities" },
       nearest: 1,
     })).toPromise();
 
-    return MoexService.map<MoexFutures>(MoexFutures, response.securities.columns, response.securities.data);
+    const futures = MoexService.map<MoexFutures>(MoexFutures, response.securities.columns, response.securities.data);
+    const marketdata = MoexService.map<MarketData>(MarketData, response.marketdata.columns, response.marketdata.data);
+    futures.forEach((fut, i) => fut.marketData = marketdata[i]);
+    return futures;
   }
 
   private static map<T extends MoexEntity>(T: { new(): T }, columns: string[], data: any[]): T[] {
     const result = new Array<T>(data.length);
-    
+
     data.forEach(element => {
       let instance = new T();
 
@@ -92,6 +99,24 @@ type pair = {
 }
 abstract class MoexEntity {
   protected abstract mapping: Array<pair>
+  public marketData: MarketData;
+}
+
+export class MarketData extends MoexEntity {
+  mapping = [
+    { key: "SECID", value: "id" },
+    { key: "OPEN", value: "open" },
+    { key: "HIGH", value: "high" },
+    { key: "LOW", value: "low" },
+    { key: "LAST", value: "last" },
+    { key: "VOLTODAY", value: "volume" },
+  ];
+  public id: string;
+  public open: number;
+  public high: number;
+  public low: number;
+  public last: number;
+  public volume: number;
 }
 
 export class MoexFutures extends MoexEntity {

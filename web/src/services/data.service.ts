@@ -7,6 +7,7 @@ import { FirebaseDataProvider } from 'src/providers/firebaseDataProvider';
 import { TickerType, TickerClass, Utils } from 'general';
 import { Mapper } from 'src/mapping/Mapper';
 import { MoexService, MoexFutures } from './moex.service';
+import { MarketData } from 'src/viewmodels/marketData';
 
 @Injectable({
   providedIn: 'root',
@@ -38,7 +39,6 @@ export class DataService {
     return this._moexService.getFutures().then(futures => {
       const result = new Array<Ticker>();
       futures.forEach(fut => {
-        console.log(fut);
         result.push(<Ticker>{
           id: fut.id,
           title: fut.shortName,
@@ -49,7 +49,8 @@ export class DataService {
             priceStep: fut.stepPrice,
             priceStepCost: fut.stepPriceCost,
             takeMoney: fut.margin,
-          }
+          },
+          marketData: <MarketData>fut.marketData
         });
       });
       return result;

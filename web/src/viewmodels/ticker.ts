@@ -1,6 +1,7 @@
 import { TickerType } from 'general/tickerType.enum';
 import { TickerClass } from 'general/tickerClass.enum';
 import { TickerInfo } from './tickerInfo';
+import { MarketData } from './marketData'
 
 export class Ticker {
     // constructor(id: string, type: TickerType, clss: TickerClass, lot: number,
@@ -40,4 +41,8 @@ export class Ticker {
     private _info?: TickerInfo;
     public get info(): TickerInfo { return this._info; }
     public set info(v: TickerInfo) { this._info = v; }
+
+    private _marketData?: MarketData;
+    public get marketData(): MarketData { return this._marketData; }
+    public set marketData(v: MarketData) { this._marketData = v; }
 }

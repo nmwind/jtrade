@@ -1,15 +1,16 @@
 <dx-form id="form" [formData]="position" [colCount]="1">
 
+  <dxi-item dataField="tickerId" editorType="dxSelectBox"
+    [editorOptions]="{searchMode:'contains', searchEnabled:true, searchExpr:['id','title'], items:tickers, displayExpr:tickerDisplayFormat, valueExpr:'id', onValueChanged:onSelected, showClearButton:true, searchTimeout:0}">
+    <dxo-label text="Ticker"> </dxo-label>
+  </dxi-item>
+
   <dxi-item itemType="group" caption="Portfolio">
     <dxi-item dataField="balance" editorType="dxNumberBox"
       [editorOptions]="{showSpinButtons:true, format:'# k', min:0, step:1}">
     </dxi-item>
     <dxi-item dataField="risk" editorType="dxNumberBox"
       [editorOptions]="{showSpinButtons:true, format:'#0.###%', min:0.005, max:1, step:0.005}"></dxi-item>
-  </dxi-item>
-
-  <dxi-item dataField="ticker" editorType="dxSelectBox"
-    [editorOptions]="{searchMode:'contains', searchEnabled:true, searchExpr:['id','title'], items:tickers, displayExpr:'title'}">
   </dxi-item>
 
   <dxi-item itemType="group" caption="Primary">
@@ -24,7 +25,11 @@
     </dxi-item>
   </dxi-item>
 
-  <dxi-item itemType="group" caption="Secondary">
+  <dxi-item itemType="group" caption="Calculation">
+    <dxi-item dataField="frisk" caption="Fact Risk" editorType="dxNumberBox"
+      [editorOptions]="{readOnly:true, format:'#0.###%'}">
+      <dxo-label text="Fact risk"> </dxo-label>
+    </dxi-item>
     <dxi-item dataField="rmult" editorType="dxNumberBox" [editorOptions]="{readOnly:true, format:'#0.##'}"> </dxi-item>
     <dxi-item dataField="loss" editorType="dxNumberBox" [editorOptions]="{readOnly:true, format:currencyFormat}">
     </dxi-item>
@@ -33,5 +38,6 @@
     <dxi-item dataField="lockedMoney" editorType="dxNumberBox" [editorOptions]="{readOnly:true, format:currencyFormat}">
     </dxi-item>
   </dxi-item>
+
 
 </dx-form>
