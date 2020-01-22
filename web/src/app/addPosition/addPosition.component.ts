@@ -89,12 +89,12 @@ export class AddPositionComponent implements OnInit {
   protected setTicker(ticker: Ticker) {
     this.priceEditorOptions = createNumberEditorOptions(ticker.info.priceStep);
 
-    //ticker.marketData.last = 153420;
-    this.position.enterPrice = ticker.marketData.last;
-    this.position.stoploss = ticker.marketData.last - ticker.marketData.last * 0.01;
-    this.position.takeprofit = ticker.marketData.last + ticker.marketData.last * 0.03;
-
     this.position.ticker = ticker;
+
+    //ticker.marketData.last = 153420;
+    this.position.enterPrice = Number(this.readOrDefault(`${ticker.assetCode}.enterPrice`, ticker.marketData.last));
+    this.position.stoploss = Number(this.readOrDefault(`${ticker.assetCode}.stoploss`, ticker.marketData.last - ticker.marketData.last * 0.01));
+    this.position.takeprofit = Number(this.readOrDefault(`${ticker.assetCode}.takeprofit`, ticker.marketData.last + ticker.marketData.last * 0.03));
   }
 
   private readOrDefault(key: string, def: any): any {
@@ -124,6 +124,7 @@ class Position {
     if (this._enterPrice !== v) {
       console.log("enterPrice = " + v);
       this._enterPrice = v;
+      window.localStorage.setItem(`${this._ticker.assetCode}.enterPrice`, v.toString());
       this.calculate("enterPrice");
     }
   }
@@ -134,6 +135,7 @@ class Position {
     if (this._stoploss !== v) {
       console.log("stoploss = " + v);
       this._stoploss = v;
+      window.localStorage.setItem(`${this._ticker.assetCode}.stoploss`, v.toString());
       this.calculate("stoploss");
     }
   }
@@ -144,6 +146,7 @@ class Position {
     if (this._takeprofit !== v) {
       console.log("takeprofit = " + v);
       this._takeprofit = v;
+      window.localStorage.setItem(`${this._ticker.assetCode}.takeprofit`, v.toString());
       this.calculate("takeprofit");
     }
   }

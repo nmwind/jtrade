@@ -18,6 +18,9 @@ export class Ticker {
     public get id(): string { return this._id; }
     // public set id(v: string) { this._id = v; }
 
+    private _assetCode: string;
+    public get assetCode(): string { return this._assetCode; }
+
     private _type: TickerType;
     public get type(): TickerType { return this._type; }
     // public set type(v: TickerType) { this._type = v; }

@@ -41,6 +41,7 @@ export class DataService {
       futures.forEach(fut => {
         result.push(<Ticker>{
           id: fut.id,
+          assetCode: fut.assetCode,
           title: fut.shortName,
           type: TickerType.Futures,
           //class: TickerClass.Stock,
