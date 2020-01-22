@@ -83,7 +83,7 @@ export class AddPositionComponent implements OnInit {
 
   public tickerDisplayFormat(ticker: Ticker) {
     if (ticker == null) return null;
-    return `${ticker.title}  (${ticker.marketData.last})`;
+    return `${ticker.title}  (${ticker.marketData.last}) (GO: ${ticker.info.takeMoney})`;
   }
 
   protected setTicker(ticker: Ticker) {
@@ -211,7 +211,7 @@ class Position {
     const balance = this.balance * 1000;
     switch (prop) {
       case "size":
-        return this.risk * balance / ((this.enterPrice - this.stoploss) * (pStepCost / pStep));
+        return parseInt((this.risk * balance / ((this.enterPrice - this.stoploss) * (pStepCost / pStep))).toString());
       case "risk":
         return (this.enterPrice - this.stoploss) * (pStepCost / pStep) * this.size / balance;
       case "loss":
