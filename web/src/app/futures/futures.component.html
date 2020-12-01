@@ -1,0 +1,70 @@
+<dx-data-grid id="gridContainer" [dataSource]="positionsStore" [showBorders]="true" [highlightChanges]="true"
+  width="100%" refreshMode="full">
+
+  <!-- <dxi-column dataField="order" caption="#" dataType="number" [editorOptions]="{showSpinButtons:false}" width="50"
+    [allowEditing]="false"></dxi-column> -->
+
+  <dxi-column type="buttons" width="70">
+    <dxi-button text="Copy" icon="copy" hint="Копировать" [onClick]="copyClick" [visible]="isCopyAvailable">
+    </dxi-button>
+    <dxi-button text="Split" icon="expand" hint="Разделить" [onClick]="splitClick" [visible]="isSplitAvailable">
+    </dxi-button>
+  </dxi-column>
+
+  <dxi-column dataField="ticker.assetCode" caption="Ticker" minWidth="100" cellTemplate="tickerCellTemplate">
+    <dxo-lookup [dataSource]="tickers" displayExpr="assetCode" valueExpr="assetCode"></dxo-lookup>
+  </dxi-column>
+
+  <div *dxTemplate="let d of 'tickerCellTemplate'">
+    <span class="tickerCode">{{d.data.ticker.assetCode}}</span><span
+      class="tickerPrice">&nbsp;{{d.data.ticker.marketData.last}}</span>
+    <!-- [class]="(d | gridCellData).diff > 0 ? 'inc' : 'dec'" -->
+    <!-- <div class="current-value">{{(d | gridCellData).value | currency:'USD':'symbol'}}</div>
+    <div class="diff">{{abs((d | gridCellData).diff) | number:'1.2-2'}}</div> -->
+  </div>
+  <!-- <dxi-column dataField="ticker.assetCode" caption="Ticker" dataType="string"></dxi-column> -->
+
+  <dxi-column dataField="enterPrice" caption="Enter" dataType="number" [editorOptions]="{showSpinButtons:true}" minWidth="70">1000</dxi-column>
+
+  <dxi-column dataField="stoploss" caption="SL" dataType="number" [editorOptions]="{showSpinButtons:true}">
+  </dxi-column>
+  <dxi-column dataField="takeprofit" caption="TP" dataType="number" [editorOptions]="{showSpinButtons:true}">
+    </dxi-column>
+
+  <dxi-column dataField="size" caption="Size" dataType="number" [editorOptions]="{showSpinButtons:true}" minWidth="50"></dxi-column>
+
+  <dxi-column dataField="lockedMoney" caption="Locked (k)" dataType="number" [allowEditing]="false"
+    cellTemplate="lockedMoneyCellTemplate" minWidth="80"></dxi-column>
+  <div *dxTemplate="let d of 'lockedMoneyCellTemplate'">
+    <span>{{d.data.lockedMoney | currency:'RUB':'symbol-narrow':'1.0-0'}}</span>
+  </div>
+
+  <dxi-column dataField="exitPrice" caption="Exit" dataType="number" [editorOptions]="{showSpinButtons:true}">1024
+  </dxi-column>
+
+  <dxi-column dataField="result" caption="Result" dataType="number" [editorOptions]="{showSpinButtons:true}"
+    [allowEditing]="false" cellTemplate="resultCellTemplate" minWidth="80">
+  </dxi-column>
+  <div *dxTemplate="let d of 'resultCellTemplate'">
+    <span [class.resultNA]="d.data.exitPrice == null" [class.resultFinal]="d.data.exitPrice != null"
+      [class.resultPlus]="d.data.result > 0"
+      [class.resultMinus]="d.data.result < 0">{{d.data.result | currency:'RUB':'symbol-narrow'}}</span>
+  </div>
+
+  <dxi-column type="buttons" width="auto">
+    <dxi-button text="Edit" icon="edit" hint="Редактировать" [onClick]="editClick" [visible]="isEditAvailable">
+    </dxi-button>
+    <dxi-button text="Save" icon="save" hint="Сохранить" [onClick]="saveClick" [visible]="isSaveAvailable">
+    </dxi-button>
+    <dxi-button text="Cancel" icon="undo" hint="Отмена" [onClick]="cancelEditClick" [visible]="isCancelEditAvailable">
+    </dxi-button>
+    <dxi-button text="Delete" icon="trash" hint="Редактировать" [onClick]="deleteClick" [visible]="isDeleteAvailable">
+    </dxi-button>
+  </dxi-column>
+
+  <dxo-editing mode="row" [allowUpdating]="false" [allowAdding]="true" [allowDeleting]="false" [useIcons]="false">
+  </dxo-editing>
+  <!-- <dxo-selection mode="single" [recursive]="false">
+  </dxo-selection> -->
+
+</dx-data-grid>

@@ -15,4 +15,9 @@ export class Utils {
         }
         return result;
     }
+
+
+    public static clearUndefined(obj: any): void {
+        Object.keys(obj).forEach(key => obj[key] === undefined && delete obj[key])
+    }
 }

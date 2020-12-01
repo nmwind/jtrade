@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/services/data.service';
 // import DataSource from "devextreme/data/data_source";
 import CustomStore from "devextreme/data/custom_store";
-import { Trade } from 'src/viewmodels';
+import { Trade, Ticker } from 'src/viewmodels';
 import { FirebaseDataProvider } from 'src/providers/firebaseDataProvider';
 import { AngularFirestore } from '@angular/fire/firestore';
 
@@ -18,10 +18,11 @@ export class PositionsComponent implements OnInit {
 
   constructor(private _dataService: DataService,
     fs: AngularFirestore) {
-    fs.collection<any>("users").get().forEach(t=>{
+
+    fs.collection<any>("users").get().forEach(t => {
       console.log(t);
       let x = t;
-      debugger;
+      //debugger;
     });;
     // let t = fs.collection("users").get().forEach(p => {
     //   let data = p.data();
@@ -38,8 +39,6 @@ export class PositionsComponent implements OnInit {
         return this._dataService.getTickers();
       }
     });
-
-
 
     this.tradesStore = new CustomStore({
       key: "id",
@@ -58,6 +57,67 @@ export class PositionsComponent implements OnInit {
     });
     this._dataService.getTickers();
   }
+
+
+  isCreateLevelAvailable(e) {
+    return true;
+  }
+
+  isSplitAvailable(e) {
+    return true;
+  }
+
+  isArchiveAvailable(e) {
+    return true;
+  }
+
+  isDeleteAvailable(e) {
+    return !e.row.isEditing;
+  }
+
+  isEditAvailable(e) {
+    return !e.row.isEditing;
+  }
+
+  isSaveAvailable(e) {
+    return e.row.isEditing;
+  }
+
+  isCancelEditAvailable(e) {
+    return e.row.isEditing;
+  }
+
+  createLevelClick(e) {
+
+  }
+
+  splitClick(e) {
+
+  }
+
+  archiveClick(e) {
+
+  }
+
+
+  deleteClick(e) {
+    e.component.deleteRow();
+  }
+
+  editClick(e) {
+    e.component.editRow(e.row.dataIndex);
+    console.log("begin edit");
+  }
+
+  saveClick(e) {
+    e.component.saveEditData();
+  }
+
+  cancelEditClick(e) {
+    e.component.cancelEditData();
+  }
+
+
 
   itemClick() {
     alert('aa');

@@ -1,0 +1,9 @@
+.dx-link .dx-icon-favicon {
+    font-size: 4em;
+    width: auto;
+    height: auto;
+    line-height: normal;
+
+    content:url('/web/src/favicon.ico');
+}
+    

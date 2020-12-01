@@ -6,8 +6,13 @@ export class Trade {
     //     this._ticker = ticker;
     // }
 
+    constructor(fields?: any) {
+        if (fields) Object.assign(this, fields);
+    }
+
     private _id: string;
     public get id(): string { return this._id; }
+    public set id(v) { this._id = v; }
 
     private _ticker: Ticker;
     public get ticker(): Ticker { return this._ticker; }
@@ -38,6 +43,7 @@ export class Trade {
 
     private _children?: Trade[];
     public get children(): Trade[] { return this._children; }
+    public set children(v:Trade[]) { this._children = v; }
 
     public get hasItems(): boolean { return this._children != null; }
 }

@@ -1,0 +1,101 @@
+[debug] [2020-09-16T18:55:26.758Z] ----------------------------------------------------------------------
+[debug] [2020-09-16T18:55:26.761Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\nmWiN\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy --only functions
+[debug] [2020-09-16T18:55:26.761Z] CLI Version:   8.10.0
+[debug] [2020-09-16T18:55:26.762Z] Platform:      win32
+[debug] [2020-09-16T18:55:26.762Z] Node Version:  v12.13.1
+[debug] [2020-09-16T18:55:26.763Z] Time:          Wed Sep 16 2020 21:55:26 GMT+0300 (GMT+03:00)
+[debug] [2020-09-16T18:55:26.764Z] ----------------------------------------------------------------------
+[debug] [2020-09-16T18:55:26.764Z] 
+[debug] [2020-09-16T18:55:26.776Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-09-16T18:55:26.777Z] > authorizing via signed-in user
+[debug] [2020-09-16T18:55:26.777Z] [iam] checking project jtrade for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2020-09-16T18:55:26.780Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/jtrade:testIamPermissions  
+ {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2020-09-16T18:55:27.743Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Wed, 16 Sep 2020 18:55:28 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=788","alt-svc":"h3-Q050=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-09-16T18:55:27.745Z] >>> HTTP REQUEST POST https://iam.googleapis.com/v1/projects/jtrade/serviceAccounts/jtrade@appspot.gserviceaccount.com:testIamPermissions  
+ {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2020-09-16T18:55:28.120Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Wed, 16 Sep 2020 18:55:28 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[warn] !  functions: package.json indicates an outdated version of firebase-functions.
+Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[info] 
+[info] === Deploying to 'jtrade'...
+[info] 
+[info] i  deploying functions 
+[info] Running command: npm --prefix "$RESOURCE_DIR" run build
+[info] +  functions: Finished running predeploy script. 
+[debug] [2020-09-16T18:55:39.305Z] > [functions] package.json contents: {
+  "name": "functions",
+  "scripts": {
+    "build": "tsc",
+    "serve": "npm run build && firebase serve --only functions",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "8"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "firebase-admin": "^8.6.0",
+    "firebase-functions": "^3.3.0"
+  },
+  "devDependencies": {
+    "typescript": "^3.7.2",
+    "firebase-functions-test": "^0.1.6"
+  },
+  "private": true
+}
+[info] i  functions: ensuring required API cloudfunctions.googleapis.com is enabled... 
+[warn] 
+[warn] !  functions: The Node.js 8 runtime is deprecated and will be decommissioned on 2021-03-15. For more information, see: https://firebase.google.com/support/faq#functions-runtime 
+[warn] 
+[debug] [2020-09-16T18:55:41.759Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/jtrade/services/cloudfunctions.googleapis.com  
+ 
+[debug] [2020-09-16T18:55:41.760Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/jtrade/services/runtimeconfig.googleapis.com  
+ 
+[debug] [2020-09-16T18:55:42.811Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Wed, 16 Sep 2020 18:55:43 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-09-16T18:55:42.929Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Wed, 16 Sep 2020 18:55:43 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] +  functions: required API cloudfunctions.googleapis.com is enabled 
+[debug] [2020-09-16T18:55:42.931Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/jtrade/adminSdkConfig  
+ 
+[debug] [2020-09-16T18:55:43.383Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Wed, 16 Sep 2020 18:55:44 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] i  functions: preparing functions directory for uploading... 
+[debug] [2020-09-16T18:55:43.385Z] >>> HTTP REQUEST GET https://runtimeconfig.googleapis.com/v1beta1/projects/jtrade/configs  
+ 
+[debug] [2020-09-16T18:55:43.773Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Wed, 16 Sep 2020 18:55:44 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-Q050=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] i  functions: packaged functions (28.9 KB) for uploading 
+[debug] [2020-09-16T18:55:44.225Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/projects/jtrade/locations/-/functions  
+ 
+[debug] [2020-09-16T18:55:45.037Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Wed, 16 Sep 2020 18:55:45 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-Q050=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-09-16T18:55:45.041Z] >>> HTTP REQUEST POST https://cloudfunctions.googleapis.com/v1/projects/jtrade/locations/us-central1/functions:generateUploadUrl  
+ 
+[debug] [2020-09-16T18:55:46.133Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Wed, 16 Sep 2020 18:55:47 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-Q050=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-09-16T18:55:46.134Z] >>> HTTP REQUEST PUT https://storage.googleapis.com/gcf-upload-us-central1-c0d98c93-b84f-4c9c-9b84-7082d607c59d/04ac179c-a140-46c6-8a72-288c9521a9d3.zip?GoogleAccessId=service-294993511528@gcf-admin-robot.iam.gserviceaccount.com&Expires=1600284346&Signature=hhBtfzkZmY%2BMDj1%2FIuNSqrnzO6qJIDe5p639Q0PQfuXTwopemElGnPt0fZ24DXU3NKy3ScxBUxLiSBU4z6m9t39u85EoRHrKQgZsbQDDyA7NaQxESjo2hfZcOyaM4Ck12D8zSSKgbpyVtEuaC89uHGB8YTKVVPt6quOVmzSnoQH2RZZVDYo1YE%2BB14ivo%2B%2Bbj6RiZw7I1UhI3TRHArJ4bov0q4tO%2F0anG8FW%2FsabA2lK5kYy7LD3W6g35u4Eb7FW9Ln0tZgEyPnLnwJj50IdsbIZlWJm1J8cL3b7B1X%2BlpgRKhTRw8eriRfi%2FcKIRs6uRRld4o0N5BOsX1dsifCc1w%3D%3D  
+ <request body omitted>
+[debug] [2020-09-16T18:55:46.762Z] <<< HTTP RESPONSE 200 {"x-guploader-uploadid":"ABg5-Ux0QzeF5Ef5zU0BhSDw_brVW3kSa-9W3bnPmF6658shdVT6Rubvb3nl68idj-1xhUFbB7blMOqvZlhOU5auYkaHWjE5tg","etag":"\"8b3bd172b6a81e13757e8bfe88f766cd\"","x-goog-generation":"1600282547592890","x-goog-metageneration":"1","x-goog-hash":"crc32c=hETp6g==, md5=izvRcraoHhN1fov+iPdmzQ==","x-goog-stored-content-length":"29594","x-goog-stored-content-encoding":"identity","vary":"Origin","content-length":"0","date":"Wed, 16 Sep 2020 18:55:47 GMT","server":"UploadServer","content-type":"text/html; charset=UTF-8","alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\""}
+[info] +  functions: functions folder uploaded successfully 
+[info] i  functions: updating Node.js 8 (Deprecated) function proxy(us-central1)... 
+[debug] [2020-09-16T18:55:46.786Z] Trigger is:  {"httpsTrigger":{}}
+[debug] [2020-09-16T18:55:46.789Z] >>> HTTP REQUEST PATCH https://cloudfunctions.googleapis.com/v1/projects/jtrade/locations/us-central1/functions/proxy {"updateMask":"sourceUploadUrl,name,labels,runtime,environmentVariables,httpsTrigger"} 
+ {"sourceUploadUrl":"https://storage.googleapis.com/gcf-upload-us-central1-c0d98c93-b84f-4c9c-9b84-7082d607c59d/04ac179c-a140-46c6-8a72-288c9521a9d3.zip?GoogleAccessId=service-294993511528@gcf-admin-robot.iam.gserviceaccount.com&Expires=1600284346&Signature=hhBtfzkZmY%2BMDj1%2FIuNSqrnzO6qJIDe5p639Q0PQfuXTwopemElGnPt0fZ24DXU3NKy3ScxBUxLiSBU4z6m9t39u85EoRHrKQgZsbQDDyA7NaQxESjo2hfZcOyaM4Ck12D8zSSKgbpyVtEuaC89uHGB8YTKVVPt6quOVmzSnoQH2RZZVDYo1YE%2BB14ivo%2B%2Bbj6RiZw7I1UhI3TRHArJ4bov0q4tO%2F0anG8FW%2FsabA2lK5kYy7LD3W6g35u4Eb7FW9Ln0tZgEyPnLnwJj50IdsbIZlWJm1J8cL3b7B1X%2BlpgRKhTRw8eriRfi%2FcKIRs6uRRld4o0N5BOsX1dsifCc1w%3D%3D","name":"projects/jtrade/locations/us-central1/functions/proxy","labels":{"deployment-tool":"cli-firebase"},"httpsTrigger":{},"runtime":"nodejs8","environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"jtrade\",\"databaseURL\":\"https://jtrade.firebaseio.com\",\"storageBucket\":\"jtrade.appspot.com\",\"locationId\":\"europe-west\"}"}}
+[debug] [2020-09-16T18:55:47.916Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Wed, 16 Sep 2020 18:55:48 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-Q050=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-09-16T18:55:47.917Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/projects/jtrade/locations/-/functions  
+ 
+[debug] [2020-09-16T18:55:48.672Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Wed, 16 Sep 2020 18:55:49 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-Q050=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-09-16T18:55:48.674Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/anRyYWRlL3VzLWNlbnRyYWwxL3Byb3h5L2RydHE2V3l4UURv  
+ 
+[debug] [2020-09-16T18:55:49.201Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Wed, 16 Sep 2020 18:55:50 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-Q050=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-09-16T18:55:51.203Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/anRyYWRlL3VzLWNlbnRyYWwxL3Byb3h5L2RydHE2V3l4UURv  
+ 
+[debug] [2020-09-16T18:55:51.839Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Wed, 16 Sep 2020 18:55:52 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-Q050=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-09-16T18:55:53.840Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/anRyYWRlL3VzLWNlbnRyYWwxL3Byb3h5L2RydHE2V3l4UURv  
+ 
+[debug] [2020-09-16T18:55:54.180Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Wed, 16 Sep 2020 18:55:55 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-Q050=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-09-16T18:55:56.181Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/anRyYWRlL3VzLWNlbnRyYWwxL3Byb3h5L2RydHE2V3l4UURv  
+ 
+[debug] [2020-09-16T18:55:56.658Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Wed, 16 Sep 2020 18:55:57 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-Q050=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-09-16T18:55:58.658Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/anRyYWRlL3VzLWNlbnRyYWwxL3Byb3h5L2RydHE2V3l4UURv  
+ 
+[debug] [2020-09-16T18:55:59.155Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Wed, 16 Sep 2020 18:56:00 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-Q050=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}

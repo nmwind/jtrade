@@ -5,12 +5,46 @@ import { AngularFirestore } from '@angular/fire/firestore';
 
 import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
+import { FuturesPositionDb } from 'firestore/model/futuresPositionDb';
+import { Utils } from 'general';
 
 @Injectable({
     providedIn: 'root',
 })
 export class FirebaseDataProvider implements DataProvider {
     constructor(private _firestore: AngularFirestore) {
+    }
+
+    public async getFuturesPositions(): Promise<FuturesPositionDb[]> {
+        return this._firestore.collection<FuturesPositionDb>("futuresPositions").get().toPromise().then(p => {
+            let result: FuturesPositionDb[] = new Array<FuturesPositionDb>();
+            p.forEach(doc => {
+                let o = <FuturesPositionDb>doc.data();
+                o.id = doc.id;
+                result.push(o);
+            });
+
+            return result;
+        });
+    }
+
+    public async insertFuturesPosition(data: FuturesPositionDb): Promise<FuturesPositionDb> {
+        Utils.clearUndefined(data);
+        let snap = await this._firestore.collection("futuresPositions").add(data);
+        const obj = <FuturesPositionDb>(await snap.get()).data();
+        return Promise.resolve(obj);
+    }
+
+    public async updateFuturesPosition(data: FuturesPositionDb): Promise<FuturesPositionDb> {
+        Utils.clearUndefined(data);
+        let snap = await this._firestore.collection("futuresPositions").doc(data.id)
+        await snap.update(data);
+        const obj = <FuturesPositionDb>(await snap.ref.get()).data();
+        return Promise.resolve(obj);
+    }
+
+    public async deleteFuturesPosition(id: string): Promise<void> {
+        await this._firestore.collection("futuresPositions").doc(id).delete();
     }
 
     public async getTickers(): Promise<TickerDb[]> {

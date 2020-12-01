@@ -1,0 +1,24 @@
+.tickerCode {
+    font-weight: bold;
+}
+
+.tickerPrice {
+    font-size: x-small;
+    vertical-align: top;
+}
+
+.resultFinal {
+    font-weight: bold;
+}
+
+.resultNA {
+    font-style: oblique;
+}
+
+.resultPlus {
+    color: green;
+}
+
+.resultMinus {
+    color: red;
+}

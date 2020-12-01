@@ -2,8 +2,29 @@ import { TickerType } from 'general/tickerType.enum';
 import { TickerClass } from 'general/tickerClass.enum';
 import { TickerInfo } from './tickerInfo';
 import { MarketData } from './marketData'
+import { TickerDb } from 'firestore/model';
+import { Observable } from 'rxjs';
 
 export class Ticker {
+    constructor(fields?: any | TickerDb) {
+        if (fields) Object.assign(this, fields);
+        if (fields) this.title = fields.shortName;
+    }
+
+    public id: string;
+    public assetCode: string;
+    public type: TickerType;
+    public class: TickerClass;
+    public base?: Ticker;
+
+    public lot: number;
+    public title?: string; //???
+
+    public info?: TickerInfo;
+
+    public marketData?: MarketData;
+}
+class Ticker2 {
     // constructor(id: string, type: TickerType, clss: TickerClass, lot: number,
     //     base?: Ticker, title?: string, info?: TickerInfo) {
     //     this._id = id;
