@@ -5,9 +5,7 @@ import { TradeDb, TickerTypeDb, TickerClassDb, TickerInfoDb, TickerDb } from 'fi
 
 import CustomStore from "devextreme/data/custom_store";
 import DataSource from "devextreme/data/data_source";
-import AutoMapper from 'ts-automapper';
 import { Trade } from 'src/viewmodels/trade';
-import { Mapper } from 'src/mapping/Mapper';
 
 
 @Component({

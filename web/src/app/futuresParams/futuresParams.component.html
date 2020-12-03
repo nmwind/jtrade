@@ -1,0 +1,44 @@
+<dx-data-grid id="gridContainer" [dataSource]="futuresStore" [showBorders]="true" [highlightChanges]="true" width="100%"
+  refreshMode="full" [paging]="false">
+
+  <!-- <dxi-column dataField="order" caption="#" dataType="number" [editorOptions]="{showSpinButtons:false}" width="50"
+    [allowEditing]="false"></dxi-column> -->
+
+  <!-- <dxi-column dataField="latName" caption="Title" dataType="string">AFZ0</dxi-column>
+  <dxi-column dataField="id" caption="Id" dataType="string">AFZ0</dxi-column> -->
+
+  <dxi-column dataField="latName" caption="Title" cellTemplate="titleCellTemplate" minWidth="100">
+  </dxi-column>
+  <div *dxTemplate="let d of 'titleCellTemplate'">
+    <span style="font-size:x-small">{{d.data.latName}}</span>
+    <a style="font-size:x-small" href="https://www.moex.com/ru/contract.aspx?code={{d.data.id}}" target="_blank">({{d.data.id}})</a>
+  </div>
+
+  <dxi-column dataField="assetCode" caption="Code" dataType="string" minWidth="60">AFZ0</dxi-column>
+
+  <dxi-column dataField="margin" caption="Margin" dataType="number" minWidth="80">AFZ0</dxi-column>
+
+  <dxi-column dataField="highLimit" caption="HighBorder" dataType="number" minWidth="80"
+    cellTemplate="highLimitCellTemplate">AFZ0</dxi-column>
+  <div *dxTemplate="let d of 'highLimitCellTemplate'">
+    <span>{{(d.data.clearingPrice+d.data.highLimit).toFixed(d.data.decimals)}}</span>
+  </div>
+
+  <dxi-column dataField="lowLimit" caption="LowBorder" dataType="number" minWidth="80"
+    cellTemplate="lowLimitCellTemplate">AFZ0</dxi-column>
+  <div *dxTemplate="let d of 'lowLimitCellTemplate'">
+    <span>{{(d.data.clearingPrice-d.data.lowLimit).toFixed(d.data.decimals)}}</span>
+  </div>
+
+  <dxi-column dataField="expired" caption="Expired" dataType="date" format="dd.MM.yyyy" minWidth="100">AFZ0</dxi-column>
+
+  <dxi-column dataField="prevOpenPosition" caption="PrevOpenPos" dataType="number" minWidth="80"></dxi-column>
+
+
+  <dxo-editing mode="row" [allowUpdating]="false" [allowAdding]="false" [allowDeleting]="false" [useIcons]="false" page>
+  </dxo-editing>
+  <!-- <dxo-selection mode="single" [recursive]="false">
+  </dxo-selection> -->
+  <dxo-scrolling columnRenderingMode="virtual"></dxo-scrolling>
+
+</dx-data-grid>

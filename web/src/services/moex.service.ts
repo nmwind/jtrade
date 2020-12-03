@@ -38,10 +38,10 @@ export class MoexService {
 
   }
 
-  public async getFutures(): Promise<MoexFutures[]> {
+  public async getFutures(nearest=true): Promise<MoexFutures[]> {
     const response = await this.http.get<MoexResponse<MoexFutures>>(MoexService.createUrl("futures", "forts", null, {
       //iss: { only: "securities" },
-      nearest: 1,
+      nearest: nearest ? 1 : 0,
     })).toPromise();
 
     const futures = MoexService.map<MoexFutures>(MoexFutures, response.securities.columns, response.securities.data);
@@ -127,10 +127,15 @@ export class MoexFutures extends MoexEntity {
     { key: "MINSTEP", value: "stepPrice" },
     { key: "LASTTRADEDATE", value: "expired" },
     { key: "SECTYPE", value: "secType" },
+    { key: "LATNAME", value: "latName" },
     { key: "ASSETCODE", value: "assetCode" },
     { key: "LOTVOLUME", value: "lot" },
     { key: "STEPPRICE", value: "stepPriceCost" },
+    { key: "LASTSETTLEPRICE", value: "clearingPrice" },
     { key: "INITIALMARGIN", value: "margin" },
+    { key: "HIGHLIMIT", value: "highLimit" },
+    { key: "LOWLIMIT", value: "lowLimit" },
+    { key: "PREVOPENPOSITION", value: "prevOpenPosition" },
   ];
 
   public id: string;
@@ -139,8 +144,10 @@ export class MoexFutures extends MoexEntity {
   public stepPrice: number;
   public expired: Date;
   public secType: string;
+  public latName: string;
   public assetCode: string;
   public lot: number;
   public stepPriceCost: number;
   public margin: number;
+  public prevOpenPosition:number;
 }

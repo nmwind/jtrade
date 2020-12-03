@@ -5,7 +5,6 @@ import { TradeDb, TickerDb, TickerTypeDb, TickerClassDb } from 'firestore/model'
 import { Ticker, TickerInfo, Trade, FuturesPosition } from 'src/viewmodels';
 import { FirebaseDataProvider } from 'src/providers/firebaseDataProvider';
 import { TickerType, TickerClass, Utils } from 'general';
-import { Mapper } from 'src/mapping/Mapper';
 import { MoexService, MoexFutures } from './moex.service';
 import { MarketData } from 'src/viewmodels/marketData';
 import { FuturesPositionDb } from 'firestore/model/futuresPositionDb';

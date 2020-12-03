@@ -13,22 +13,23 @@ import {
    DxTreeListModule, DxDataGridModule, DxSelectBoxModule, DxNavBarModule, DxTemplateModule, DxFormModule
 } from 'devextreme-angular';
 
-import "ts-automapper";
 import { PositionsComponent } from './positions/positions.component';
 import { ArchiveComponent } from './archive/archive.component';
 import { AddPositionComponent } from './addPosition/addPosition.component';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { FuturesComponent } from './futures/futures.component';
+import { FuturesParamsComponent } from './futuresParams/futuresParams.component';
 
 // declare var automapper;
 
 @NgModule({
-   declarations: [
+   declarations: [	
       AppComponent,
       PositionsComponent,
       ArchiveComponent,
       AddPositionComponent,
-      FuturesComponent
+      FuturesComponent,
+      FuturesParamsComponent
    ],
    imports: [
       BrowserModule,
